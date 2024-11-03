@@ -1,0 +1,44 @@
+<div class="container">
+  <h2>User Data</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Full Name</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td *ngIf="editUser?.username !== user.username">{{ user.username }}</td>
+        <td *ngIf="editUser?.username === user.username">
+          <input [(ngModel)]="editUser.username" disabled />
+        </td>
+
+        <td *ngIf="editUser?.username !== user.username">{{ user.fullName }}</td>
+        <td *ngIf="editUser?.username === user.username">
+          <input [(ngModel)]="editUser.fullName" />
+        </td>
+
+        <td *ngIf="editUser?.username !== user.username">{{ user.phone }}</td>
+        <td *ngIf="editUser?.username === user.username">
+          <input [(ngModel)]="editUser.phone" />
+        </td>
+
+        <td *ngIf="editUser?.username !== user.username">{{ user.email }}</td>
+        <td *ngIf="editUser?.username === user.username">
+          <input [(ngModel)]="editUser.email" />
+        </td>
+
+        <td>
+          <button *ngIf="editUser?.username !== user.username" (click)="editUserDetails(user)" class="btn btn-warning">Edit</button>
+          <button *ngIf="editUser?.username === user.username" (click)="saveUser()" class="btn btn-success">Save</button>
+          <button *ngIf="editUser?.username === user.username" (click)="cancelEdit()" class="btn btn-secondary">Cancel</button>
+          <button (click)="deleteUser(user.username)" class="btn btn-danger">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
